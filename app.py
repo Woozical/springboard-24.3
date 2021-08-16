@@ -34,3 +34,20 @@ def add_cupcake():
     db.session.commit()
 
     return (jsonify(cupcake=cupcake.to_json()), 201)
+
+@app.route('/api/cupcakes/<int:id>', methods=['PATCH'])
+def edit_cupcake(id):
+    cupcake = Cupcake.query.get_or_404(id)
+    cupcake.update_from_json(request.json)
+
+    db.session.commit()
+
+    return jsonify(cupcake=cupcake.to_json())
+
+@app.route('/api/cupcakes/<int:id>', methods=['DELETE'])
+def delete_cupcake(id):
+    cupcake = Cupcake.query.get_or_404(id)
+    db.session.delete(cupcake)
+    db.session.commit()
+
+    return jsonify(message=f'deleted {id}')

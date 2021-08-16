@@ -25,3 +25,9 @@ class Cupcake(db.Model):
             "rating" : self.rating,
             "image" : self.image
         }
+    
+    def update_from_json(self, json_obj):
+        self.flavor = json_obj.get('flavor', self.flavor)
+        self.size = json_obj.get('size', self.size)
+        self.rating = json_obj.get('rating', self.rating)
+        self.image = json_obj.get('image', self.image)
