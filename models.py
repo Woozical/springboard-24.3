@@ -15,4 +15,13 @@ class Cupcake(db.Model):
     size = db.Column(db.String, nullable=False)
     rating = db.Column(db.Float, nullable=False)
     image = db.Column(db.String, nullable=False, default=DEFAULT_IMG_URL)
-    
+
+
+    def to_json(self):
+        return {
+            "id" : self.id,
+            "flavor" : self.flavor,
+            "size" : self.size,
+            "rating" : self.rating,
+            "image" : self.image
+        }
